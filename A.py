@@ -38,12 +38,14 @@ def binary_threshold_image(clustered_image):
     return binary_image
 
 def apply_morphological_operations(binary_image):
-    """Apply morphological operations to the binary image to close gaps and remove noise."""
-    # Define a structuring element
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
+    """Apply morphological operations to the binary image to remove noise and close gaps."""
+    # Define a structuring element for opening (remove small noise)
+    kernel_open = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5))
+    opened_image = cv2.morphologyEx(binary_image, cv2.MORPH_OPEN, kernel_open)
 
-    # Apply morphological closing to close gaps
-    closed_image = cv2.morphologyEx(binary_image, cv2.MORPH_CLOSE, kernel)
+    # Define a structuring element for closing (close gaps)
+    kernel_close = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15, 15))
+    closed_image = cv2.morphologyEx(opened_image, cv2.MORPH_CLOSE, kernel_close)
 
     return closed_image
 
@@ -67,12 +69,11 @@ def crop_diagnostic_info(image, crop_height=50):
     """Crop out the diagnostic information at the bottom of the image."""
     return image[:-crop_height, :, :]
 
-
 # Load and preprocess the image
 image_path = 'C:\\Users\\humza\\OneDrive\\Desktop\\Job\\Segmentation\\USH-Week42-_0080.tif'
 image = load_and_preprocess_image(image_path)
 
-cropped_image = crop_diagnostic_info(image, crop_height=55)
+cropped_image = crop_diagnostic_info(image, crop_height=65)
 
 # Apply k-means clustering
 clustered_image = apply_kmeans_to_image(cropped_image)
@@ -84,8 +85,14 @@ binary_image = binary_threshold_image(clustered_image)
 closed_image = apply_morphological_operations(binary_image)
 
 # Count the large white areas
-large_area_count, large_areas_image = count_large_white_areas(closed_image, min_size=10000)
+large_area_count, large_areas_image = count_large_white_areas(closed_image, min_size=5000)
 print(f'Number of large white areas: {large_area_count}')
+
+plt.imsave('cropped_image.png', cropped_image)
+plt.imsave('clustered_image.png', clustered_image)
+plt.imsave('binary_image.png', binary_image, cmap='gray')
+plt.imsave('closed_image.png', closed_image, cmap='gray')
+plt.imsave('large_areas_image.png', large_areas_image, cmap='gray')
 
 # Plotting the original, binary, and large areas images
 plt.figure(figsize=(15, 5))
