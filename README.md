@@ -17,7 +17,7 @@ Then we apply morphological operations to close the gaps between the clusters an
 
 The final output only shows clusters that are a certain size. (We will figure out a heuristic a way to figure out what size we should focus on for different images.)
 
-![image](https://github.com/user-attachments/assets/5725d7d5-74fd-430c-a9ab-2dabd2cb9b4f)
+![image](https://github.com/user-attachments/assets/3c4d4935-620b-40ae-b377-d7d0febd5068)
 
 To improve the accuracy of our cell count and cluster detection, I will implement the watershed algorithm to effectively separate clustered cells that are currently being identified as a single entity. This approach will particularly address the issue observed in areas like the bottom right, where two distinct cells are incorrectly merged into one. 
 
