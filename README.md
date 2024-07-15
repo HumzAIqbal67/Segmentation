@@ -9,11 +9,11 @@ The code currently uses both image analysis techniques and ML techniques to segm
 
 We then apply k-means and apply a simple binary threshold first. We can see that the cells are nicely highlighted.
 
-![image](https://github.com/user-attachments/assets/d191dc94-2dd3-4a5a-813e-9150aec65f81)
+![image](https://github.com/user-attachments/assets/6c2afb07-da6d-4b1e-bbea-a79d8ec53871)
 
 Then we apply morphological operations to close the gaps between the clusters and to remove noise.
 
-![image](https://github.com/user-attachments/assets/6c2afb07-da6d-4b1e-bbea-a79d8ec53871)
+![image](https://github.com/user-attachments/assets/5725d7d5-74fd-430c-a9ab-2dabd2cb9b4f)
 
 The final output only shows clusters that are a certain size. (We will figure out a heuristic a way to figure out what size we should focus on for different images.)
 
