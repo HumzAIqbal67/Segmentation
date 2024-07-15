@@ -19,7 +19,7 @@ The final output only shows clusters that are a certain size. (We will figure ou
 
 ![image](https://github.com/user-attachments/assets/3c4d4935-620b-40ae-b377-d7d0febd5068)
 
-To improve the accuracy of our cell count and cluster detection, I will implement the watershed algorithm to effectively separate clustered cells that are currently being identified as a single entity. This approach will particularly address the issue observed in areas like the bottom right, where two distinct cells are incorrectly merged into one. 
+Here the count was 13 which is not correct. To improve the accuracy of our cell count and cluster detection, I will implement the watershed algorithm to effectively separate clustered cells that are currently being identified as a single entity. This approach will particularly address the issue observed in areas like the bottom right, where two distinct cells are incorrectly merged into one. 
 
 Further improvements include refining the thresholding techniques to enhance cell boundary detection and minimize noise, incorporating machine learning algorithms to better differentiate between cells and background artifacts, and enhancing the preprocessing steps to standardize cell images for more consistent results. Moreover, implementing adaptive contrast adjustment can help in highlighting faint cells, ensuring they are not missed. I have yet to optimize the parameters, and a key goal will be to make these parameters dynamic enough to work effectively across multiple cell types.
 
